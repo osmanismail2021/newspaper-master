@@ -53,7 +53,8 @@ export default function Navbar() {
 
         </Link>
       </div>
-      <SearchBar keyword={keyword} keywordHandler={keywordHandle} />
+      <SearchBar keyword={keyword} keywordHandler={keywordHandle}  /> 
+      
       <Link className='searchBar' to={`searchpage?q=${keyword}`}>
         <BiSearchAlt className='searchGlass' />
       </Link>
