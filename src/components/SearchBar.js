@@ -6,6 +6,7 @@ const SearchBar = ({keyword,keywordHandler}) => {
     <input 
      
      key="random1"
+     className='inputSearch'
     
      placeholder={"search news"}
      onChange={(e) => keywordHandler(e.target.value)}

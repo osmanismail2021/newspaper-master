@@ -1,4 +1,4 @@
-import { BrowserRouter, BrowserRouter as Router, Route, Routes } from "react-router-dom"
+import {  BrowserRouter as Router, Route, Routes } from "react-router-dom"
 import Navbar from "./components/Layout/Navbar";
 import Home from "./components/Home"
 import Footer from "./components/Layout/Footer";
@@ -11,6 +11,7 @@ import Trafficnews from "./components/Trafficnews";
 import SearchPage from "./components/SearchPage";
 import { Database } from './components/context/index';
 import { React, useState, useEffect } from 'react';
+import Menu from "./components/Layout/Menu"
 
 
 
@@ -18,11 +19,12 @@ import { React, useState, useEffect } from 'react';
 export default function App() {
   
   const [articles, setArticles] = useState([])
+  const [menuOpen, setMenuOpen] = useState(false)
 
 
   useEffect(() => {
    const fetchIt = async ()=>{
-    await fetch('https://newsapi.org/v2/everything?q=news&apiKey=a85abafdd40249398d40a7794a9506a1')
+    await fetch('/api/v2/everything?q=news&apiKey=a85abafdd40249398d40a7794a9506a1')
       .then(res => res.json())
       .then(data => {
         setArticles(data.articles)
@@ -37,9 +39,10 @@ export default function App() {
   }, [])
   return (
     <Database.Provider value={articles}>
-      <BrowserRouter>
+      <Router>
         
-          <Navbar />
+          <Navbar menuOpen={menuOpen} setMenuOpen={setMenuOpen} />
+          <Menu menuOpen={menuOpen} setMenuOpen={setMenuOpen} />
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/belgiumnews" element={<Belgiumnews />} />
@@ -52,7 +55,7 @@ export default function App() {
           </Routes>
           <Footer />
 
-      </BrowserRouter>
+      </Router>
     </Database.Provider>
 
 

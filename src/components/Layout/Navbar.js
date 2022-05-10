@@ -9,8 +9,9 @@ import { GiTrafficLightsReadyToGo } from "react-icons/gi"
 import "./style/navbar.css"
 import SearchBar from '../SearchBar';
 import { useState } from 'react';
+import Menu from './Menu'
 
-export default function Navbar() {
+export default function Navbar({ menuOpen, setMenuOpen }) {
   const [keyword, setKeyword] = useState("")
 
   const keywordHandle = (data) => {
@@ -18,7 +19,7 @@ export default function Navbar() {
   }
 
   return (
-    <nav className='navbar'>
+    <nav className={'navbar ' + (menuOpen && "active")}>
       <Link to="/">
         <img className='navbar_logo' src="./images/logo_newspaper.jpg" alt="" />
       </Link>
@@ -58,6 +59,12 @@ export default function Navbar() {
       <Link className='searchBar' to={`searchpage?q=${keyword}`}>
         <BiSearchAlt className='searchGlass' />
       </Link>
+
+      <div className="hamburger" onClick={() =>setMenuOpen(!menuOpen)}>
+            <span className="lines line1"></span>
+            <span className="lines line2"></span>
+            <span className="lines line3"></span>
+          </div>
     </nav>
   )
 }
